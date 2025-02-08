@@ -1,0 +1,28 @@
+import type { Metadata } from "next";
+import { Work_Sans } from "next/font/google";
+import "./globals.css";
+
+import StyledComponentsRegistry from "./lib/registry";
+
+const workSans = Work_Sans({
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "STC",
+  description: "Discover your next workout obsession",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={workSans.className}>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+      </body>
+    </html>
+  );
+}
