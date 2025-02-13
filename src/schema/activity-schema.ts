@@ -6,7 +6,7 @@ export const activitySchema = z.object({
     leftToBook: z.number(),
   }),
   duration: z.object({
-    start: z.date(),
+    start: z.coerce.date(),
   }),
   instructors: z.optional(
     z.array(
