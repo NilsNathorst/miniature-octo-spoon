@@ -1,5 +1,4 @@
-import { getStartAndEndDate } from "@/utils";
-
+import { getAllClubs, getStartAndEndDate } from "@/app/utils";
 import { ActivityList, Hero, Typography } from "@/components";
 
 async function getActivites(id: number | string) {
@@ -18,18 +17,11 @@ async function getActivites(id: number | string) {
 }
 
 async function getClubInfo(clubId: string) {
-  const url = `${process.env.STC_API_BASE_URL}/businessunits`;
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch clubs`);
-  }
-
-  const clubs = await response.json();
+  const clubs = await getAllClubs();
   const club = clubs.find((c) => c.id === parseInt(clubId));
 
   if (!club) {
-    throw new Error(`Club ${clubId} not found`);
+    throw new Error(`Club with id:${clubId} could not be found`);
   }
 
   return club;
@@ -56,12 +48,10 @@ export default async function Page({
     </>
   );
 }
+`${process.env.STC_API_BASE_URL}/businessunits`;
 
 export async function generateStaticParams() {
-  const clubs = await fetch(
-    `${process.env.STC_API_BASE_URL}/businessunits`
-  ).then((res) => res.json());
-
+  const clubs = await getAllClubs();
   return [
     clubs.map((club) => ({
       club: club.id.toString(),

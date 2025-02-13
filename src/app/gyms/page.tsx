@@ -2,11 +2,7 @@ import Link from "next/link";
 
 import { Hero } from "@/components";
 
-async function getAllClubs() {
-  const url = `${process.env.STC_API_BASE_URL}/businessunits`;
-  const data = await fetch(url);
-  return data.json();
-}
+import { getAllClubs } from "../utils";
 
 export default async function Home() {
   const clubs = await getAllClubs();

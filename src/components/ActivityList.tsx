@@ -1,4 +1,4 @@
-import { getOrderOfWeekdays, groupActivitiesByDay } from "../utils";
+import { getOrderOfWeekdays, groupActivitiesByDay } from "../app/utils";
 import { Card } from "./Card";
 import { Typography } from "./Typography";
 
