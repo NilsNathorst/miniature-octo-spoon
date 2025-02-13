@@ -1,6 +1,6 @@
-export { Typography } from "./Typography";
-export type { TypographyProps } from "./Typography";
+export { Typography } from "./typography";
+export type { TypographyProps } from "./typography";
 
-export { Card } from "./Card";
-export { Hero } from "./Hero";
-export { ActivityList } from "./ActivityList";
+export { Card } from "./card";
+export { Hero } from "./hero";
+export { ActivityList } from "./activity-list";

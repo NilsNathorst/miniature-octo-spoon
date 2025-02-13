@@ -1,7 +1,7 @@
 import { getOrderOfWeekdays, groupActivitiesByDay } from "../app/utils";
 import { Activities } from "@/schema";
-import { Card } from "./Card";
-import { Typography } from "./Typography";
+import { Card } from "./card";
+import { Typography } from "./typography";
 
 interface ActivityListProps {
   activities: Activities;
