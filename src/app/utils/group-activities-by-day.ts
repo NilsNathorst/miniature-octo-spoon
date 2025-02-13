@@ -23,7 +23,6 @@ export const groupActivitiesByDay = (activities: Activities) => {
     const date = new Date(start);
     const weekday = date.toLocaleString("en-US", { weekday: "long" });
 
-    console.log({ start });
     if (acc[weekday]?.length > 0) {
       acc[weekday].push(curr);
       return acc;

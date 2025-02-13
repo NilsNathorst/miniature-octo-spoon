@@ -19,16 +19,23 @@ export default async function Page({
 }) {
   const { club } = await params;
   const activities = await getActivities(club);
-  const clubInfo = await getClubInfo(club);
+  const { name, address } = await getClubInfo(club);
 
   return (
     <>
-      <Hero />
-      <div>
-        <Typography variant="h1">{clubInfo.name}</Typography>
-        <Typography>HEJ</Typography>
-        <Typography component="span">HEJ HEJ</Typography>
-      </div>
+      <Hero imageUrl="/images/gym-hero.png">
+        <div>
+          <Typography color="light" variant="h1">
+            {name}
+          </Typography>
+          <Typography color="light" variant="body2" fontWeight="medium">
+            {address.street}
+          </Typography>
+          <Typography color="light" variant="body2" fontWeight="medium">
+            {address.postalCode} {address.city}
+          </Typography>
+        </div>
+      </Hero>
       <ActivityList activities={activities} />
     </>
   );
