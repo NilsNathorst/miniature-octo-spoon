@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
 import "./globals.css";
 
-import StyledComponentsRegistry from "./lib/registry";
+import { ThemeWrapper } from "./theme/ThemeWrapper";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={workSans.className}>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <ThemeWrapper>{children}</ThemeWrapper>
       </body>
     </html>
   );
