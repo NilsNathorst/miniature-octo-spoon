@@ -19,7 +19,7 @@ interface CardProps {
   name: string;
   startTime: string;
   instructor: string;
-  slots: string;
+  slots: number;
 }
 
 export const Card = ({ name, startTime, instructor, slots }: CardProps) => {

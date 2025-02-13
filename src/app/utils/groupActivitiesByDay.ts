@@ -1,3 +1,5 @@
+import { Activities } from "@/schema";
+
 export const getOrderOfWeekdays = () => {
   const weekDays = [
     "Monday",
@@ -15,12 +17,13 @@ export const getOrderOfWeekdays = () => {
   return offset;
 };
 
-export const groupActivitiesByDay = (activities) => {
+export const groupActivitiesByDay = (activities: Activities) => {
   return activities.reduce((acc, curr) => {
     const { start } = curr.duration;
     const date = new Date(start);
     const weekday = date.toLocaleString("en-US", { weekday: "long" });
 
+    console.log({ start });
     if (acc[weekday]?.length > 0) {
       acc[weekday].push(curr);
       return acc;
@@ -30,5 +33,5 @@ export const groupActivitiesByDay = (activities) => {
       ...acc,
       [weekday]: [curr],
     };
-  }, {});
+  }, {} as { [key: string]: Activities });
 };

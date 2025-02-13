@@ -1,9 +1,10 @@
 import { getOrderOfWeekdays, groupActivitiesByDay } from "../app/utils";
+import { Activities } from "@/schema";
 import { Card } from "./Card";
 import { Typography } from "./Typography";
 
 interface ActivityListProps {
-  activities: any[];
+  activities: Activities;
 }
 
 export const ActivityList = ({ activities }: ActivityListProps) => {

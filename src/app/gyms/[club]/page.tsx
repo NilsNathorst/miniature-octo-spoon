@@ -1,20 +1,5 @@
-import { getAllClubs, getStartAndEndDate } from "@/app/utils";
+import { getAllClubs, getActivities } from "@/app/utils";
 import { ActivityList, Hero, Typography } from "@/components";
-
-async function getActivites(id: number | string) {
-  const { startDate, endDate } = getStartAndEndDate();
-  const clubActivitesUrl = `${process.env.STC_API_BASE_URL}/businessunits/${id}/groupactivities?period.start=${startDate}&period.end=${endDate}`;
-  const activities = await fetch(clubActivitesUrl)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to fetch activities");
-      }
-      return response.json();
-    })
-    .then((data) => data);
-
-  return activities;
-}
 
 async function getClubInfo(clubId: string) {
   const clubs = await getAllClubs();
@@ -33,7 +18,7 @@ export default async function Page({
   params: Promise<{ club: string }>;
 }) {
   const { club } = await params;
-  const activities = await getActivites(club);
+  const activities = await getActivities(club);
   const clubInfo = await getClubInfo(club);
 
   return (
