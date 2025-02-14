@@ -40,7 +40,6 @@ export default async function Page({
           </span>
         </GymInfoContainer>
       </Hero>
-      {/* <div style={{ padding: "12px" }}> */}
       <MainContainer>
         {activities?.length === 0 ? (
           <Typography variant="body2" fontWeight="medium">
@@ -56,7 +55,6 @@ export default async function Page({
     </>
   );
 }
-`${process.env.STC_API_BASE_URL}/businessunits`;
 
 export async function generateStaticParams() {
   const gym = await getAllClubs();
