@@ -6,7 +6,7 @@ export const theme = {
     dark: "#171515",
   },
   spacing: (...args: number[]) => {
-    let res: string[] = [];
+    const res: string[] = [];
     args.forEach((arg) => res.push(`${8 * arg}px`));
     return res.join(" ");
   },
