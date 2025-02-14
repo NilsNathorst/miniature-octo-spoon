@@ -37,7 +37,7 @@ export const GymCard = ({ title }: GymCardProps) => {
         <Typography variant="h3" component="span" color="light">
           {title}
         </Typography>
-        <Image src={ArrowLeft} alt={title} />
+        <Image src={ArrowLeft} alt="" />
       </TitleWrapper>
     </GymCardContainer>
   );
