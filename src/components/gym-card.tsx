@@ -25,6 +25,8 @@ const TitleWrapper = styled.div`
   text-decoration: none;
   img {
     transform: rotate(180deg);
+    align-self: flex-end;
+    margin-bottom: ${({ theme }) => theme.spacing(0.5)};
   }
 `;
 
