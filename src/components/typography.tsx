@@ -13,12 +13,12 @@ export type TypographyProps = {
   component?: React.ElementType;
   color?: keyof Theme["palette"];
   fontWeight?: FontWeight;
-};
+} & React.HTMLAttributes<HTMLElement>;
 
 type TypographyRootProps = {
-  variant: Variant;
-  color: keyof Theme["palette"];
-  fontWeight: FontWeight;
+  $variant: Variant;
+  $color: keyof Theme["palette"];
+  $fontWeight: FontWeight;
 };
 
 const variantMapping: Record<Variant, React.ElementType> = {
@@ -69,11 +69,11 @@ const fontWeights: Record<FontWeight, number> = {
 };
 
 const TypographyRoot = styled("span")<TypographyRootProps>`
-  font-weight: ${({ fontWeight }) => fontWeights[fontWeight]};
+  font-weight: ${({ $fontWeight }) => fontWeights[$fontWeight]};
   padding: 0;
   margin: 0;
-  color: ${({ theme, color }) => theme.palette[color]};
-  ${({ variant }) => typographyVariantStyles[variant]};
+  color: ${({ theme, $color }) => theme.palette[$color]};
+  ${({ $variant }) => typographyVariantStyles[$variant]};
 `;
 
 export const Typography = ({
@@ -88,9 +88,9 @@ export const Typography = ({
 
   return (
     <TypographyRoot
-      fontWeight={fontWeight}
-      color={color}
-      variant={variant}
+      $fontWeight={fontWeight}
+      $color={color}
+      $variant={variant}
       as={Component}
       {...rest}
     >

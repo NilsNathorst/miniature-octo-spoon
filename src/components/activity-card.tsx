@@ -3,11 +3,11 @@
 import styled from "styled-components";
 import { Typography } from "@/components";
 
-const CardWrapper = styled.div`
+const ActivityCardContainer = styled.div`
   background-color: ${(props) => props.theme.palette.light};
-  padding: 46px 16px 16px;
-  border-radius: 16px;
-  margin: 16px;
+  padding: ${({ theme }) => theme.spacing(6, 2, 2)};
+  gap: ${({ theme }) => theme.spacing(2)};
+  border-radius: ${({ theme }) => theme.radius.medium};
 `;
 
 const InnerWrapper = styled.div`
@@ -15,22 +15,27 @@ const InnerWrapper = styled.div`
   gap: ${({ theme }) => theme.spacing(2)};
 `;
 
-interface CardProps {
+interface ActivityCardProps {
   name: string;
   startTime: string;
   instructor: string;
   slots: number;
 }
 
-export const Card = ({ name, startTime, instructor, slots }: CardProps) => {
+export const ActivityCard = ({
+  name,
+  startTime,
+  instructor,
+  slots,
+}: ActivityCardProps) => {
   return (
-    <CardWrapper>
+    <ActivityCardContainer>
       <Typography color="accent">{slots} places remaining</Typography>
       <Typography variant="h3">{name}</Typography>
       <InnerWrapper>
         <Typography variant="caption">{startTime}</Typography>
         <Typography variant="caption">{instructor}</Typography>
       </InnerWrapper>
-    </CardWrapper>
+    </ActivityCardContainer>
   );
 };

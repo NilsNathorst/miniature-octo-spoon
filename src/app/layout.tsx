@@ -3,6 +3,7 @@ import { Work_Sans } from "next/font/google";
 import "./globals.css";
 
 import { ThemeWrapper } from "./theme";
+import { RootLayoutContainer } from "@/components";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={workSans.className}>
-        <ThemeWrapper>{children}</ThemeWrapper>
+        <ThemeWrapper>
+          <RootLayoutContainer>{children}</RootLayoutContainer>
+        </ThemeWrapper>
       </body>
     </html>
   );

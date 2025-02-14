@@ -13,15 +13,14 @@ interface HeroProps {
   imageUrl: string;
 }
 
-const Container = styled.div<{ imageUrl: string }>`
+const Container = styled.div<{ $imageUrl: string }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 400px;
   padding: ${({ theme }) => theme.spacing(5, 3)};
   box-sizing: border-box;
-  outline: solid blue;
-  background-image: url(${({ imageUrl }) => imageUrl});
+  background-image: url(${({ $imageUrl }) => $imageUrl});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -59,7 +58,7 @@ const Navbar = ({ disabledBackButton = false }) => {
       <>
         {disabledBackButton ? null : (
           <IconButton onClick={() => router.back()} aria-label="Go back">
-            <Image priority src={ArrowLeft} alt="Go Back" />
+            <Image src={ArrowLeft} alt="Go Back" />
           </IconButton>
         )}
       </>
@@ -70,7 +69,7 @@ const Navbar = ({ disabledBackButton = false }) => {
 
 export const Hero = ({ children, imageUrl, disabledBackButton }: HeroProps) => {
   return (
-    <Container imageUrl={imageUrl}>
+    <Container $imageUrl={imageUrl}>
       <Navbar disabledBackButton={disabledBackButton} />
       {children}
     </Container>

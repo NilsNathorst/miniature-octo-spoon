@@ -18,19 +18,30 @@ export const getOrderOfWeekdays = () => {
 };
 
 export const groupActivitiesByDay = (activities: Activities) => {
-  return activities.reduce((acc, curr) => {
-    const { start } = curr.duration;
-    const date = new Date(start);
-    const weekday = date.toLocaleString("en-US", { weekday: "long" });
+  return activities.reduce(
+    (acc, curr) => {
+      const { start } = curr.duration;
+      const date = new Date(start);
+      const weekday = date.toLocaleString("en-US", { weekday: "long" });
 
-    if (acc[weekday]?.length > 0) {
-      acc[weekday].push(curr);
-      return acc;
-    }
+      if (acc[weekday]?.length > 0) {
+        acc[weekday].push(curr);
+        return acc;
+      }
 
-    return {
-      ...acc,
-      [weekday]: [curr],
-    };
-  }, {} as { [key: string]: Activities });
+      return {
+        ...acc,
+        [weekday]: [curr],
+      };
+    },
+    {
+      Monday: [],
+      Tuesday: [],
+      Wednesday: [],
+      Thursday: [],
+      Friday: [],
+      Saturday: [],
+      Sunday: [],
+    } as { [key: string]: Activities }
+  );
 };

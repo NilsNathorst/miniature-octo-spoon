@@ -1,6 +1,6 @@
-import { Clubs, clubsSchema } from "@/schema";
+import { Gyms, gymsSchema } from "@/schema";
 
-export async function getAllClubs(): Promise<Clubs> {
+export async function getAllGyms(): Promise<Gyms> {
   try {
     const url = `${process.env.STC_API_BASE_URL}/businessunits`;
 
@@ -11,17 +11,17 @@ export async function getAllClubs(): Promise<Clubs> {
     }
 
     const data = await response.json();
-    const result = clubsSchema.safeParse(data);
+    const result = gymsSchema.safeParse(data);
 
     if (!result.success) {
       throw new Error(
-        `Invalid club data format: ${result.error.issues[0].message}`
+        `Invalid gym data format: ${result.error.issues[0].message}`
       );
     }
 
     return result.data;
   } catch (error) {
-    console.error("Error fetching clubs:", error);
+    console.error("Error fetching gyms:", error);
     throw error;
   }
 }

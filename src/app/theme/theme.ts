@@ -10,6 +10,9 @@ export const theme = {
     args.forEach((arg) => res.push(`${8 * arg}px`));
     return res.join(" ");
   },
+  radius: {
+    medium: "16px",
+  },
 } as const;
 
 export type Theme = typeof theme;

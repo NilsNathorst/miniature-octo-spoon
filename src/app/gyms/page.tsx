@@ -1,7 +1,8 @@
 import Link from "next/link";
 
-import { Hero, Typography } from "@/components";
+import { GymCard, GymList, Hero, Typography } from "@/components";
 import { getAllClubs } from "@/app/utils";
+import { MainContainer } from "../../components/main-container";
 
 export default async function Home() {
   const clubs = await getAllClubs();
@@ -13,13 +14,15 @@ export default async function Home() {
           Our gyms
         </Typography>
       </Hero>
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-        {clubs.map((club) => (
-          <Link key={club.id} href={`/gyms/${club.id}`}>
-            {club.name} →
-          </Link>
-        ))}
-      </div>
+      <MainContainer>
+        <GymList>
+          {clubs.map((club) => (
+            <Link key={club.id} href={`/gyms/${club.id}`}>
+              <GymCard title={club.name.replace("STC ", "")} />
+            </Link>
+          ))}
+        </GymList>
+      </MainContainer>
     </>
   );
 }
