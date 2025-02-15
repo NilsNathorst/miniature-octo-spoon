@@ -11,7 +11,7 @@ export const getOrderOfWeekdays = () => {
     "Sunday",
   ];
 
-  const day = new Date().getDay();
+  const day = new Date().getUTCDay();
   const offset = [...weekDays.slice(day - 1), ...weekDays.slice(0, day - 1)];
 
   return offset;

@@ -1,5 +1,5 @@
 const addWeek = (date: Date) =>
-  new Date(date.setDate(date.getDate() + 1 * 6)).toISOString();
+  new Date(date.setUTCDate(date.getUTCDate() + 1 * 6)).toISOString();
 
 export const getStartAndEndDate = () => {
   const date = new Date();
