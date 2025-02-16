@@ -1,10 +1,10 @@
-import { getAllClubs, getActivities } from "@/app/utils";
+import { getAllGyms, getActivities } from "@/app/utils";
 import { ActivityList, Hero, Typography } from "@/components";
 import { GymTitle, PageSubtitle, GymInfoContainer } from "./styled";
 import { MainContainer } from "../../../components/main-container";
 
-async function getClubInfo(gymId: string) {
-  const gyms = await getAllClubs();
+async function getGymInfo(gymId: string) {
+  const gyms = await getAllGyms();
   const gym = gyms.find(({ id }) => id === parseInt(gymId));
 
   if (!gym) {
@@ -21,7 +21,7 @@ export default async function Page({
 }) {
   const { gym } = await params;
   const activities = await getActivities(gym);
-  const { name, address } = await getClubInfo(gym);
+  const { name, address } = await getGymInfo(gym);
 
   return (
     <>
@@ -57,7 +57,7 @@ export default async function Page({
 }
 
 export async function generateStaticParams() {
-  const gym = await getAllClubs();
+  const gym = await getAllGyms();
   return [
     gym.map((gym) => ({
       gym: gym.id.toString(),

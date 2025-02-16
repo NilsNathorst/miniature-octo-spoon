@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 import { GymCard, GymList, Hero, Typography } from "@/components";
-import { getAllClubs } from "@/app/utils";
+import { getAllGyms } from "@/app/utils";
 import { MainContainer } from "../../components/main-container";
 
 export default async function Home() {
-  const clubs = await getAllClubs();
+  const gyms = await getAllGyms();
 
   return (
     <>
@@ -16,9 +16,9 @@ export default async function Home() {
       </Hero>
       <MainContainer>
         <GymList>
-          {clubs.map((club) => (
-            <Link key={club.id} href={`/gyms/${club.id}`}>
-              <GymCard title={club.name.replace("STC ", "")} />
+          {gyms.map((gym) => (
+            <Link key={gym.id} href={`/gyms/${gym.id}`}>
+              <GymCard title={gym.name.replace("STC ", "")} />
             </Link>
           ))}
         </GymList>
