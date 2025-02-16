@@ -22,8 +22,7 @@ export const groupActivitiesByDay = (activities: Activities) => {
     (acc, curr) => {
       const { start } = curr.duration;
       const date = new Date(start);
-      const weekday = date.toLocaleString("sv-SE", {
-        timeZone: "UTC",
+      const weekday = date.toLocaleString("en-US", {
         weekday: "long",
       });
 

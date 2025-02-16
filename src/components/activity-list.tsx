@@ -66,9 +66,10 @@ export const ActivityList = ({ activities }: ActivityListProps) => {
                   const instructor = activity.instructors?.[0]?.name || "-";
 
                   const startTime = date.toLocaleTimeString("sv-SE", {
-                    timeZone: "UTC",
+                    timeZone: "Europe/Stockholm",
                     hour: "2-digit",
                     minute: "2-digit",
+                    hourCycle: "h24",
                   });
 
                   return (
