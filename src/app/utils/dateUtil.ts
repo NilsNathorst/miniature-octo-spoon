@@ -1,4 +1,4 @@
-const addWeek = (date: Date) =>
+export const addWeek = (date: Date) =>
   new Date(date.setUTCDate(date.getUTCDate() + 1 * 6)).toISOString();
 
 export const getStartAndEndDate = () => {
