@@ -5,9 +5,10 @@ import { Activities } from "@/schema";
 import { ActivityCard } from "./activity-card";
 import { Typography } from "./typography";
 import styled from "styled-components";
+import { use } from "react";
 
 interface ActivityListProps {
-  activities: Activities;
+  activities: Promise<Activities>;
 }
 
 export const ActivityInnerWrapper = styled.div`
@@ -25,49 +26,66 @@ export const ActivityListContainer = styled.div`
   }
 `;
 
+export const PageSubtitle = styled(Typography)`
+  opacity: 0.7;
+  margin-bottom: ${({ theme }) => theme.spacing(1)};
+`;
+
 export const ActivityList = ({ activities }: ActivityListProps) => {
+  const allActivities = use(activities);
   const weekDays = getOrderOfWeekdays();
-  const grouped = groupActivitiesByDay(activities);
+  const grouped = groupActivitiesByDay(allActivities);
+
+  if (allActivities.length === 0)
+    return (
+      <Typography variant="body2" fontWeight="medium">
+        Unfortunately there are no instructor-led classes the coming week.
+      </Typography>
+    );
 
   return (
-    <ActivityListContainer>
-      {weekDays.map((weekDay, i) => {
-        let title = weekDay;
-        if (i === 0) title = "Today";
-        if (i === 1) title = "Tomorrow";
+    <>
+      <PageSubtitle>Upcoming sessions</PageSubtitle>
+      <ActivityListContainer>
+        {weekDays.map((weekDay, i) => {
+          let title = weekDay;
+          if (i === 0) title = "Today";
+          if (i === 1) title = "Tomorrow";
 
-        if (grouped[weekDay].length === 0) return null;
+          if (grouped[weekDay].length === 0) return null;
 
-        return (
-          <div key={title}>
-            <Typography variant="h2">{title}</Typography>
-            <ActivityInnerWrapper>
-              {grouped[weekDay].map((activity) => {
-                const { name, id } = activity;
-                const slots = activity.slots.leftToBook;
-                const date = new Date(activity.duration.start);
+          return (
+            <div key={title}>
+              <Typography variant="h2">{title}</Typography>
+              <ActivityInnerWrapper>
+                {grouped[weekDay].map((activity) => {
+                  const { name, id } = activity;
+                  const slots = activity.slots.leftToBook;
+                  const date = new Date(activity.duration.start);
 
-                const instructor = activity.instructors?.[0]?.name || "-";
+                  const instructor = activity.instructors?.[0]?.name || "-";
 
-                const startTime = date.toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                });
+                  const startTime = date.toLocaleTimeString("sv-SE", {
+                    timeZone: "UTC",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  });
 
-                return (
-                  <ActivityCard
-                    key={id}
-                    name={name}
-                    slots={slots}
-                    startTime={startTime}
-                    instructor={instructor}
-                  />
-                );
-              })}
-            </ActivityInnerWrapper>
-          </div>
-        );
-      })}
-    </ActivityListContainer>
+                  return (
+                    <ActivityCard
+                      key={id}
+                      name={name}
+                      slots={slots}
+                      startTime={startTime}
+                      instructor={instructor}
+                    />
+                  );
+                })}
+              </ActivityInnerWrapper>
+            </div>
+          );
+        })}
+      </ActivityListContainer>
+    </>
   );
 };

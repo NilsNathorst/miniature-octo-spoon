@@ -1,7 +1,8 @@
 import { getAllGyms, getActivities } from "@/app/utils";
-import { ActivityList, Hero, Typography } from "@/components";
-import { GymTitle, PageSubtitle, GymInfoContainer } from "./styled";
+import { Hero, ActivityList, Typography, Loading } from "@/components";
+import { GymTitle, GymInfoContainer } from "./styled";
 import { MainContainer } from "../../../components/main-container";
+import { Suspense } from "react";
 
 async function getGymInfo(gymId: string) {
   const gyms = await getAllGyms();
@@ -20,7 +21,7 @@ export default async function Page({
   params: Promise<{ gym: string }>;
 }) {
   const { gym } = await params;
-  const activities = await getActivities(gym);
+  const activities = getActivities(gym);
   const { name, address } = await getGymInfo(gym);
 
   return (
@@ -41,16 +42,9 @@ export default async function Page({
         </GymInfoContainer>
       </Hero>
       <MainContainer>
-        {activities?.length === 0 ? (
-          <Typography variant="body2" fontWeight="medium">
-            Unfortunately there are no instructor-led classes the coming week.
-          </Typography>
-        ) : (
-          <>
-            <PageSubtitle>Upcoming sessions</PageSubtitle>
-            <ActivityList activities={activities} />
-          </>
-        )}
+        <Suspense fallback={<Loading />}>
+          <ActivityList activities={activities} />
+        </Suspense>
       </MainContainer>
     </>
   );
