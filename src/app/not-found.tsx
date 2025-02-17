@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Hero, MainContainer, Typography } from "@/components";
-import styled from "styled-components";
 
 export default function NotFound() {
   return (
