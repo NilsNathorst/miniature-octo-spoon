@@ -21,6 +21,7 @@ const Container = styled.div<{ $imageUrl: string }>`
   padding: ${({ theme }) => theme.spacing(5, 3)};
   box-sizing: border-box;
   background-image: url(${({ $imageUrl }) => $imageUrl});
+  background-color: ${({ theme }) => theme.palette.dark};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;

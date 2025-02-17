@@ -1,16 +1,29 @@
-"use client"; // Error boundaries must be Client Components
+"use client";
+
+import Link from "next/link";
+import { Hero, MainContainer, Typography } from "../../components";
 
 export default function Error({
   error,
-  reset,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
 }) {
   return (
-    <div>
-      <h2>Woops! {error.message}.</h2>
-      <button onClick={() => reset()}>Try again</button>
-    </div>
+    <>
+      <Hero imageUrl="/images/404_background.jpg">
+        <Typography color="light" variant="h1">
+          :/
+        </Typography>
+      </Hero>
+      <MainContainer>
+        <Typography variant="h2">Woops!</Typography>
+        <Typography variant="body1" fontWeight="medium">
+          {error.message}
+        </Typography>
+        <Typography component="span" variant="body2">
+          <Link href="/">Take me home</Link>
+        </Typography>
+      </MainContainer>
+    </>
   );
 }

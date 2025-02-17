@@ -49,12 +49,3 @@ export default async function Page({
     </>
   );
 }
-
-export async function generateStaticParams() {
-  const gym = await getAllGyms();
-  return [
-    gym.map((gym) => ({
-      gym: gym.id.toString(),
-    })),
-  ];
-}

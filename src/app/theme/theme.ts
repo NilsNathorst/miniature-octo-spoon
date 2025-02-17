@@ -11,6 +11,7 @@ export const theme = {
     return res.join(" ");
   },
   radius: {
+    small: "8px",
     medium: "16px",
   },
 } as const;
